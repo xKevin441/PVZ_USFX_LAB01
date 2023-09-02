@@ -3,6 +3,7 @@
 
 #include "Plant.h"
 #include "Components/StaticMeshComponent.h"
+#include "UObject/ConstructorHelpers.h"
 
 // Sets default values
 APlant::APlant()
@@ -11,7 +12,14 @@ APlant::APlant()
 	PrimaryActorTick.bCanEverTick = true;
 
 	PlantMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("PlantMesh"));
-	
+
+	RootComponent = PlantMesh;
+	static ConstructorHelpers::FObjectFinder<UStaticMesh> PlantMeshAsset(TEXT("StaticMesh'/Game/StarterContent/Shapes/Shape_Cylinder.Shape_Cylinder'"));
+
+	if (PlantMeshAsset.Succeeded())
+	{
+		PlantMesh->SetStaticMesh(PlantMeshAsset.Object);
+	}
 }
 
 // Called when the game starts or when spawned

@@ -13,6 +13,11 @@ class APVZ_USFX_LAB01GameMode : public AGameModeBase
 
 public:
 	APVZ_USFX_LAB01GameMode();
+
+protected:
+	// Called when the game starts or when spawned
+	virtual void BeginPlay() override;
+
 };
 
 
